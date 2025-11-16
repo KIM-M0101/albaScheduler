@@ -1,45 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import WorkplaceRegisterScreen from './app/screens/WorkplaceRegisterScreen';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  // 가짜 navigation 객체 (goBack, navigate 호출 오류 방지용)
+  const fakeNavigation = {
+    goBack: () => console.log('뒤로가기 눌림'),
+    navigate: (screen: string) => console.log(`${screen} 화면으로 이동 시도`),
+  };
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <WorkplaceRegisterScreen navigation={fakeNavigation} />
+    </SafeAreaView>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
